@@ -65,7 +65,7 @@ export default function ChatCard({
       {/* Chat Text and Feedback */}
       <Box>
         <Typography fontWeight={700} fontSize={{ xs: 14, md: 16 }}>
-          {details.type === 'AI' ? 'Soul AI' : 'You'}
+          {details.type === 'AI' ? <span>Soul AI</span> : 'You'}
         </Typography>
 
         <Typography fontSize={{ xs: 12, md: 16 }}>{details.text}</Typography>
