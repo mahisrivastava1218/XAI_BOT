@@ -1,5 +1,4 @@
 import {
-  TextField,
   Box,
   Button,
   Stack,
@@ -40,7 +39,7 @@ export default function ChatInput({ generateResponse, setScroll, chat, clearChat
       <Box component="form" onSubmit={handleSend}>
         <Stack direction="row" spacing={{ xs: 0.5, md: 2 }}>
           {/* Message Input */}
-          <TextField
+          <input
             placeholder="Message Bot AI..."
             value={message}
             onChange={(e) => setMessage(e.target.value)}
