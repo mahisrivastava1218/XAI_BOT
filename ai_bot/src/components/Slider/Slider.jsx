@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ThemeContext } from "../Theme/Theme";
+import { ThemeContext } from "../../components/Theme/Theme";
 import {
   Typography,
   Box,
@@ -7,45 +7,55 @@ import {
   Button,
   useMediaQuery,
 } from "@mui/material";
-import icon from "../../assets/Group 1000011095.png";
 import { Link } from "react-router-dom";
+
 import AddCommentIcon from "@mui/icons-material/AddComment";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function Sidebar({ setChat, closeMenu }) {
+import icon from "../../assets/Group 1000011095.png";
+
+export default function Slider({ setChat, closeMenu }) {
   const { mode, setMode } = useContext(ThemeContext);
-  const isMobile = useMediaQuery("(max-width:800px)");
+
+  // Check if the screen is small (like on mobile)
+  const isSmallScreen = useMediaQuery("(max-width:800px)");
+
+  // Change theme between light and dark
+  const toggleTheme = () => {
+    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+  };
 
   return (
     <Box>
-      {/* Close button for mobile sidebar */}
-      {isMobile && (
+      {/* Show close button on mobile devices */}
+      {isSmallScreen && (
         <Button
-          endIcon={<CloseIcon />}
           onClick={closeMenu}
+          endIcon={<CloseIcon />}
           sx={{
             width: "100%",
             justifyContent: "flex-end",
             color: mode === "light" ? "primary.dark" : "text.primary",
+            padding:"5px"
           }}
         >
           Close
         </Button>
       )}
 
-      {/* New Chat Button */}
+      {/* Start New Chat */}
       <Link to="/" style={{ textDecoration: "none" }}>
         <Stack
-          onClick={() => {
-            setChat([]);
-            closeMenu();
-          }}
           direction="row"
           alignItems="center"
           justifyContent="space-between"
           spacing={1}
           py={2}
           px={{ xs: 2, md: 3 }}
+          onClick={() => {
+            setChat([]);
+            closeMenu();
+          }}
           sx={{
             bgcolor: "primary.main",
             "&:hover": {
@@ -57,7 +67,7 @@ export default function Sidebar({ setChat, closeMenu }) {
             <Box
               component="img"
               src={icon}
-              alt="new chat"
+              alt="New Chat"
               height={42}
               width={42}
               borderRadius={2}
@@ -67,15 +77,17 @@ export default function Sidebar({ setChat, closeMenu }) {
             <Typography
               fontSize={{ xs: 16, md: 20 }}
               color="text.primary"
+              variant="heading"
             >
-             New Chat
+               New Chat
             </Typography>
           </Stack>
+
           <AddCommentIcon sx={{ color: "text.primary" }} />
         </Stack>
       </Link>
 
-      {/* Past Chats Button */}
+      {/* View Chat History */}
       <Box p={{ xs: 2, md: 3 }}>
         <Link to="/history" style={{ textDecoration: "none" }}>
           <Button
