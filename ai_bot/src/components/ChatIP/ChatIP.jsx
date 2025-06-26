@@ -31,8 +31,10 @@ export default function ChatInput({ generateResponse, setScroll, chat, clearChat
 
   // Focus input box on mount
   useEffect(() => {
+     if (inputRef.current) {
     inputRef.current.focus();
-  }, []);
+  }
+}, []);
 
   return (
     <Box flexShrink={0} px={{ xs: 0.5, md: 3 }} pb={{ xs: 1, md: 3 }}>
